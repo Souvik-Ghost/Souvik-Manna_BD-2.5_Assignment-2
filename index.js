@@ -213,10 +213,10 @@ app.get("/stocks/sort/growth", (req, res) => {
 
 //3
 function filterByExchange(stock, exchangeType) {
-  return stock.exchange.toLowerCase() == exchangeType;
+  return stock.exchange.toLowerCase() === exchangeType.toLowerCase();
 }
 app.get("/stocks/filter/exchange", (req, res) => {
-  let exchangeType = req.query.exchangeType.toLowerCase();
+  let exchangeType = req.query.exchangeType;
   let stocksCopy = stocks.filter((stock) =>
     filterByExchange(stock, exchangeType),
   );
@@ -226,10 +226,10 @@ app.get("/stocks/filter/exchange", (req, res) => {
 
 //4
 function filterByIndustry(stock, industryType) {
-  return stock.industry.toLowerCase() == industryType;
+  return stock.industry.toLowerCase() === industryType.toLowerCase();
 }
 app.get("/stocks/filter/industry", (req, res) => {
-  let industryType = req.query.industryType.toLowerCase();
+  let industryType = req.query.industryType;
   let stocksCopy = stocks.filter((stock) =>
     filterByIndustry(stock, industryType),
   );
