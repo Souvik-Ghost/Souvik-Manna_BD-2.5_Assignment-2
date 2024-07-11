@@ -179,17 +179,18 @@ function sortingStocksPriceLowToHigh(stock1, stock2) {
   return stock1.price - stock2.price;
 }
 app.get("/stocks/sort/pricing", (req, res) => {
-  let sortingPricing = req.query.sortingPricing;
+  let pricing = req.query.pricing;
   let stocksCopy = stocks.slice();
-  if (sortingPricing === "high-to-low") {
+  if (pricing === "high-to-low") {
     stocksCopy.sort(sortingStocksPriceHighToLow);
-  } else if (sortingPricing === "low-to-high") {
+  } 
+  else if (pricing === "low-to-high") {
     stocksCopy.sort(sortingStocksPriceLowToHigh);
   }
   res.json({ stocks: stocksCopy });
 });
-//stocks/sort/pricing?sortingPricing=high-to-low
-//stocks/sort/pricing?sortingPricing=low-to-high
+//stocks/sort/pricing?pricing=high-to-low
+//stocks/sort/pricing?pricing=low-to-high
 
 //2
 function sortingStocksGrowthHighToLow(stock1, stock2) {
@@ -199,11 +200,11 @@ function sortingStocksGrowthLowToHigh(stock1, stock2) {
   return stock1.growth - stock2.growth;
 }
 app.get("/stocks/sort/growth", (req, res) => {
-  let sortingGrowth = req.query.sortingGrowth;
+  let growth = req.query.growth;
   let stocksCopy = stocks.slice();
-  if (sortingGrowth === "high-to-low") {
+  if (growth === "high-to-low") {
     stocksCopy.sort(sortingStocksGrowthHighToLow);
-  } else if (sortingGrowth === "low-to-high") {
+  } else if (growth === "low-to-high") {
     stocksCopy.sort(sortingStocksGrowthLowToHigh);
   }
   res.json({ stocks: stocksCopy });
@@ -212,26 +213,26 @@ app.get("/stocks/sort/growth", (req, res) => {
 //stocks/sort/growth?sortingGrowth=low-to-high
 
 //3
-function filterByExchange(stock, exchangeType) {
-  return stock.exchange.toLowerCase() === exchangeType.toLowerCase();
+function filterByExchange(stock, exchange) {
+  return stock.exchange.toLowerCase() === exchange.toLowerCase();
 }
 app.get("/stocks/filter/exchange", (req, res) => {
-  let exchangeType = req.query.exchangeType;
+  let exchange = req.query.exchange;
   let stocksCopy = stocks.filter((stock) =>
-    filterByExchange(stock, exchangeType),
+    filterByExchange(stock, exchange),
   );
   res.json({ stocks: stocksCopy });
 });
-//stocks/filter/exchange?exchangeType=nse
+///stocks/filter/exchange?exchange=nse
 
 //4
-function filterByIndustry(stock, industryType) {
-  return stock.industry.toLowerCase() === industryType.toLowerCase();
+function filterByIndustry(stock, industry) {
+  return stock.industry.toLowerCase() === industry.toLowerCase();
 }
 app.get("/stocks/filter/industry", (req, res) => {
-  let industryType = req.query.industryType;
+  let industry = req.query.industry;
   let stocksCopy = stocks.filter((stock) =>
-    filterByIndustry(stock, industryType),
+    filterByIndustry(stock, industry),
   );
   res.json({ stocks: stocksCopy });
 });
